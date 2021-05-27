@@ -29,9 +29,9 @@ This script does the following:
 ## Installation and usage
 
 1. Make sure you have the newest Python 3 (updated if needed): `$ python --version`
-2. Download script: `$ git clone https://github.com/vol24pl/Autoplot.git`
+2. Download script: `$ git clone https://github.com/murisfurder/Autoplot.git`
 3. Open script folder: `$ cd ./Autoplot/`
-4. Adjust global variables `$ nano automatic-plotter.py`
+4. Adjust global variables `$ vim automatic-plotter.py`
 5. Run script: `$ python automatic-plotter.py`
 
 

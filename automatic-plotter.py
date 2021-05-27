@@ -65,7 +65,7 @@ def use_all_cores():
 
 
 def add_plot():
-    command = f"{chia_executable} chia plots create -k 32 -b 3724 -n 1 -r4 -t /srv/chia/plots/ -2 /srv/chia/plots/ -d /mnt/chia/plots &"
+    command = f"{chia_executable} plots create -k 32 -b 3724 -n 1 -r4 -t /srv/chia/plots/ -2 /srv/chia/plots/ -d /mnt/chia/plots &"
     unique_filename = str(uuid.uuid4())
     new_log_file_path = f"{logs_location}/{unique_filename}{string_contained_in_all_logs}"
     with open(new_log_file_path, "w") as file:
