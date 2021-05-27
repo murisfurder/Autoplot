@@ -4,18 +4,18 @@ import uuid
 import subprocess
 
 # Global variables. ADJUST THEM TO YOUR NEEDS
-chia_executable = "/Applications/Chia.app/Contents/Resources/app.asar.unpacked/daemon/chia" # directory of chia binary file
-numberOfLogicalCores = 4 # number of logical cores that you want to use overall
+chia_executable = os.path.expanduser('~')+"/chia-blockchain/venv/bin/chia" # directory of chia binary file
+numberOfLogicalCores = 16 # number of logical cores that you want to use overall
 run_loop_interval = 10 # seconds of delay before this algorithm executes another loop
 refresh_logs_interval = 10 # seconds of delay before this algorithm will try to re-read all logs after adding plot
 logs_location = os.path.expanduser('~')+"/.chia/mainnet/plotter/" # location of the log files. Remove all corrupted and interrupted log files!
 string_contained_in_all_logs = ".txt"  # shared part of the name of all the log files (all logfiles must have it!)
 phase_one_finished = "Time for phase 1 =" # part of the log file that means 1/2 core should be freed
 phase_four_finished = "Time for phase 4 =" # part of the log file that means 2/2 core should be freed
-temporary_directory = os.path.expanduser('~')+"/chia/tmp" # plotting final destination
-final_directory = os.path.expanduser('~')+"/chia/plots" # plotting directory
-farmer_public_key = "a863778ea9874932cf6e4aab3e2192fb48fd983610ade5989a7f3579426716c8d7ee188bdd221d70494c26bf4b25e2c6" # change to your key
-pool_public_key = "92366cbdd35c2502510ed2cc23074ec6df2943bd30be574818d04aaf941c672be3cf7c81f58fb4ef8346af72d6705415" # change to your key
+temporary_directory = "/srv/chia/plots/" # plotting final destination
+final_directory = "/mnt/chia/plots/" # plotting directory
+farmer_public_key = "8536d991e929298b79570ad16ee1150d3905121a44251eda3740f550fcb4285578a2a22448a406c5e73c2e9d77cd7eb2" # change to your key
+pool_public_key = "907f125022f2b5bf75ea5ef1f108b0c9110931891a043f421837ba6edcaa976920c5b2c5ba8ffdfb00c0bd71e7b5a2b1" # change to your key
 
 
 # Functions
@@ -65,7 +65,7 @@ def use_all_cores():
 
 
 def add_plot():
-    command = f"{chia_executable} plots create -k 32 -e -b 4000 -r 2 -u 128 -t {temporary_directory} -d {final_directory} -f {farmer_public_key} -p {pool_public_key} &"
+    command = f"{chia_executable} chia plots create -k 32 -b 3724 -n 1 -r4 -t /srv/chia/plots/ -2 /srv/chia/plots/ -d /mnt/chia/plots &"
     unique_filename = str(uuid.uuid4())
     new_log_file_path = f"{logs_location}/{unique_filename}{string_contained_in_all_logs}"
     with open(new_log_file_path, "w") as file:
