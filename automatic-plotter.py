@@ -40,15 +40,15 @@ def count_used_cores(logs):
     used_cores_counter = 0
     for (index, log) in enumerate(logs):
         print(f"Starting log #{index}")
-        print("Potentially it's still in phase one assigning 2 cores")
-        used_cores_counter += 2
+        print("Potentially it's still in phase one assigning 4 cores")
+        used_cores_counter += 4
         for line in log:
             if phase_one_finished in line:
-                print("Phase one was finished in the log, deallocating one core")
-                used_cores_counter -= 1
+                print("Phase one was finished in the log, deallocating two cores")
+                used_cores_counter -= 2
             if phase_four_finished in line:
-                print("Phase four was finished in the log, deallocating one core")
-                used_cores_counter -= 1
+                print("Phase four was finished in the log, deallocating two cores")
+                used_cores_counter -= 2
     print(f"===FINISH COUNTING: {used_cores_counter} USED CORES===")
     return used_cores_counter
 
@@ -57,7 +57,7 @@ def use_all_cores():
     log_list = fetch_logs()
     cores_used = count_used_cores(log_list)
     while numberOfLogicalCores > cores_used +1:
-        print("There are two cores free, adding new plot!")
+        print("There are four cores free, adding new plot!")
         add_plot()
         time.sleep(refresh_logs_interval)
         log_list = fetch_logs()
